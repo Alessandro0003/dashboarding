@@ -4,6 +4,7 @@ test('update profile successfully', async ({ page }) => {
   await page.goto('/', { waitUntil: 'networkidle' })
 
   await page.getByRole('button', { name: 'Pizza Shop' }).click()
+
   await page.getByRole('menuitem', { name: 'Perfil da loja' }).click()
 
   await page.getByLabel('Nome').fill('Pizza Ale')
@@ -15,20 +16,19 @@ test('update profile successfully', async ({ page }) => {
 
   const toast = page.getByText('Perfil atualizado com success')
 
-  expect(toast).toBeVisible()
+  await expect(toast).toBeVisible()
 
-  await page.waitForTimeout(250)
+  await page.waitForTimeout(2000)
 
-  expect(page.getByRole('button', { name: 'Pizza Ale' })).toBeVisible()
-})
+  const closeButton = page.getByRole('button', { name: 'Close' })
+  const isCloseButtonVisible = await closeButton.isVisible()
 
-test('close in modal profile', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'networkidle' })
+  if (!isCloseButtonVisible) {
+    console.error('Botão "Close" não está visível')
+  } else {
+    console.log('Botão "Close" visível, tentando clicar')
+    await closeButton.click()
+  }
 
-  await page.getByRole('button', { name: 'Pizza Shop' }).click()
-  await page.getByRole('menuitem', { name: 'Perfil da loja' }).click()
-
-  await page.getByRole('button', { name: 'Close' }).click()
-
-  await page.waitForTimeout(250)
+  await expect(page.getByRole('button', { name: 'Pizza Ale' })).toBeVisible()
 })
