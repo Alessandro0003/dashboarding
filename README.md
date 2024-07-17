@@ -25,7 +25,7 @@
   > Provides metrics to identify which products are most popular with customers.
 - Analysis of Least Sold Items:
   > Identifies which items sold the least, helping to optimize inventory and sales strategies.
-- Percentual de Vendas:
+- Sales Percentage:
   > Calculates the percentage of sales for different periods, such as day, month, etc., allowing a detailed analysis of sales performance.
 
 ## Tools Using ⚙ 🔥
